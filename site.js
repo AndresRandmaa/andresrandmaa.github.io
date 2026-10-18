@@ -64,14 +64,27 @@ const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
     hide();
   });
 
+  let current = null;
+
   for (const link of zooms) {
     link.addEventListener("click", (e) => {
       if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
+      current = link;
+      // The page shows a display-size copy; its width and height attributes
+      // are the original's. Size the view from those, show the copy at once,
+      // then swap in the original once it has been decoded.
       const thumb = link.querySelector("img");
-      img.src = link.href;
+      const w = thumb ? Number(thumb.getAttribute("width")) : 0;
+      const h = thumb ? Number(thumb.getAttribute("height")) : 0;
+      img.style.width = w && h ? `min(${w}px, 100%, calc((100vh - 3rem) * ${w / h}))` : "";
       img.alt = thumb ? thumb.alt : "";
-      img.style.maxWidth = thumb ? `min(100%, ${thumb.naturalWidth}px)` : "";
+      img.src = (thumb && thumb.currentSrc) || link.href;
+      const full = new Image();
+      full.src = link.href;
+      full.decode().then(() => {
+        if (current === link && dialog.open) img.src = link.href;
+      }, () => {});
       dialog.showModal();
       requestAnimationFrame(() => dialog.classList.add("is-open"));
     });
