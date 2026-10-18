@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Nordic Netcare AI invoice reader · Andres Randmaa</title>
+  <meta name="description" content="How I replaced manual retyping of clinic invoices with an AI invoice reader and a side-by-side review step for case workers, built in-house instead of bought.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="site-name" href="index.html">Andres Randmaa</a>
+      <nav aria-label="Site">
+        <ul class="site-nav">
+          <li><a href="index.html">All case studies</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="intro intro-case">
+        <div class="intro-text">
+          <p class="eyebrow">Case study 01 · Nordic Netcare</p>
+          <h1>From retyping invoices to checking them</h1>
+          <p class="lede">Patients upload clinic invoices to get reimbursed, and case workers used to retype every one by hand. I led an AI invoice reader with a human review step, and we built it ourselves for a fraction of what document-processing vendors charged.</p>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>Problem</dt>
+            <dd>Case workers retyped every patient-uploaded invoice by hand.</dd>
+          </div>
+          <div>
+            <dt>Decision</dt>
+            <dd>After vendor demos, build the extraction in-house on an OpenAI model, with a side-by-side review step for every invoice.</dd>
+          </div>
+          <div class="is-result">
+            <dt>Result</dt>
+            <dd>Almost 20 times cheaper per document than the vendor quotes (tested on 100+ invoices); review about 3 times faster (informal estimate).</dd>
+          </div>
+        </dl>
+      </div>
+      <dl class="facts-meta">
+        <div>
+          <dt>My role</dt>
+          <dd>Product manager and UX designer, hands-on. 2024 to 2026.</dd>
+        </div>
+        <div>
+          <dt>Product</dt>
+          <dd>A patient app (PWA) for people referred by insurance companies for physiotherapy, and the internal practice management system case workers use.</dd>
+        </div>
+        <div>
+          <dt>The flow</dt>
+          <dd>A patient uploads a clinic invoice, a case worker turns it into treatment records, and the patient is reimbursed under their insurance agreement.</dd>
+        </div>
+      </dl>
+
+      <section aria-labelledby="problem">
+        <h2 id="problem"><span class="step">01</span>The problem</h2>
+        <div class="prose">
+          <p>Patients get an invoice from the clinic, usually a PDF or a photo, sometimes a hand-written receipt. They upload it in the app, as a file or with the camera. Nordic Netcare reimburses it if the clinic’s credentials are on it and the patient’s insurance plan covers the treatment.</p>
+          <p>On the other side, every upload landed in a list in the practice management system. A case worker opened it and created the treatment records under the patient’s case by hand, retyping the clinic, treatment, dates and prices. I sat with case workers while they did it. It was slow, it was easy to get wrong, and it took time away from the work that mattered more: calls with patients.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="scope">
+        <h2 id="scope"><span class="step">02</span>What I chose to build, and what I cut</h2>
+        <div class="prose">
+          <p>The request came from the co-CEO. I started by looking at what we could buy: I scheduled demos with document-processing vendors that specialise in extracting invoice data.</p>
+          <p>Two things came out of the demos. The first was a design idea. The better vendors showed the extracted data side by side with the source document. With or without AI, a case worker would still have to check every extraction, so that check had to be fast. I made mockups of how the review should work, what the AI would extract, and how a case worker could confirm or correct it.</p>
+          <p>The second was the price, and what was behind it. The vendors were running AI models for the extraction themselves. Three of them formally quoted about 20 cents per document on average. I tested OpenAI models directly on more than 100 sample invoices, and the token cost per document was almost 20 times lower. Building the integration ourselves also meant one less vendor contract and SLA to manage.</p>
+          <p>Invoices carry personal and health details. We used OpenAI’s API under a data processing agreement, with zero data retention, and management signed off on the setup before it went live.</p>
+        </div>
+        <div class="split">
+          <div class="panel">
+            <h3>Built</h3>
+            <ul>
+              <li>Extraction in-house, directly on an OpenAI model.</li>
+              <li>PDFs and image files, including hand-written receipts when legible and carrying the clinic’s credentials.</li>
+              <li>A review screen with the source document beside the extracted fields. Every field stays editable.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Cut</h3>
+            <ul>
+              <li>A document-processing vendor: about 20 times the cost per document, and another contract and SLA.</li>
+              <li>Auto-approval. Company policy was that a person confirms every invoice, to catch AI hallucinations, so every invoice still goes to a case worker.</li>
+              <li>A confidence score. I proposed running the extraction several times and lowering confidence where the results disagreed. We dropped it: a score would not have changed the workflow, and priorities were moving to other projects.</li>
+              <li>Highlighting where on the invoice each value came from. With a person checking every invoice, further speed-ups had diminishing returns next to the jump from typing to checking.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="design">
+        <h2 id="design"><span class="step">03</span>The design</h2>
+        <div class="prose">
+          <p>The practice management system is an internal tool, so the design work here went into speed and clarity for case workers (fewer clicks, clearer controls), not visual polish.</p>
+          <p>Before, the case worker opened the uploaded file in another browser tab, searched it for each required value and typed it into an empty form. The browser could not zoom, rotate or pan the file, so a photo taken upside down or at an angle was hard to read.</p>
+        </div>
+
+        <figure>
+          <p class="label">Before</p>
+          <img class="shot" src="assets/nnc/pms-before.png" width="1492" height="854" alt="The old Add treatment record dialog. Empty fields for treatment subtype, invoice number, therapist, treatment dates, clinic price and insurance price, several marked in red as required. No invoice is visible.">
+          <figcaption>An empty form. The invoice is in another tab.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>After, the invoice sits on the right and the form on the left arrives already filled in. Each field the AI filled is marked “Extracted, needs review”. The case worker’s job changes from typing to checking: compare, correct if needed, save.</p>
+        </div>
+
+        <figure>
+          <p class="label label-after">After</p>
+          <div class="annotated">
+            <img class="shot" src="assets/nnc/invoice-extraction.png" width="2612" height="2150" alt="The new Add treatment record dialog. On the left, fields filled in by the AI, including three treatment dates, each with an eye marker meaning extracted, needs review; the clinic price shows a warning that it exceeds the maximum allowed price, with a Replace link. On the right, the uploaded file with three extracted invoices as tabs, the first marked done, and a viewer showing the invoice page.">
+            <span class="marker" style="left: 80%; top: 20.2%" aria-hidden="true">1</span>
+            <span class="marker" style="left: 82%; top: 82.4%" aria-hidden="true">2</span>
+            <span class="marker" style="left: 24.5%; top: 68.8%" aria-hidden="true">3</span>
+            <span class="marker" style="left: 63%; top: 91.3%" aria-hidden="true">4</span>
+          </div>
+          <figcaption>Extracted fields on the left, the source document on the right. Sample invoice and test clinic, no patient data.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <h3>Details that make checking fast</h3>
+          <ol class="details">
+            <li><strong>One upload, several invoices.</strong> Patients often photograph more than one invoice at once. Each one the AI finds gets its own tab, marked done once it is saved.</li>
+            <li><strong>A viewer built for uploads and photos.</strong> Zoom, rotate and page through the document in place, so an upside-down or skewed photo no longer means squinting at another tab.</li>
+            <li><strong>The insurance rules are checked for the case worker.</strong> If an extracted price is above what the agreement allows, the form says so and offers to replace it with the maximum allowed price.</li>
+            <li><strong>Nothing is final until a person saves it.</strong> Every field is editable, and an invoice can be parked with “Mark as waiting” when something has to be clarified with the patient or the clinic.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section aria-labelledby="result">
+        <h2 id="result"><span class="step">04</span>The result</h2>
+        <div class="prose">
+          <p>Invoices arrive in the hundreds every day. Extracting each one is <strong>almost 20 times cheaper</strong> than the three vendor quotes of roughly 20 cents per document, tested on more than 100 sample invoices. <strong>Reviewing and approving an invoice became about 3 times faster.</strong> That second figure is an informal estimate from case worker feedback and my own observation, not timed.</p>
+          <p>When the invoice is in an accepted format and readable, the AI extracts the required fields correctly and the case worker only reviews and approves. The accounting department confirmed that invoice data was correct more often than with manual entry.</p>
+          <p>Most failed extractions came from poor photos or the wrong kind of file, a problem that starts before the AI sees the document. A quality check at upload was in the backlog but did not make it ahead of other goals.</p>
+          <p><strong>What I would measure now:</strong> review time per invoice, the share of extractions saved without edits, and the share of uploads that fail.</p>
+        </div>
+      </section>
+
+      <nav class="next" aria-label="More case studies">
+        <a class="next-forward" href="nordic-netcare-app.html"><span>Next</span>The patient app, rebuilt from components</a>
+      </nav>
+      <p class="next-home"><a href="index.html">Back to all case studies</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <p>Andres Randmaa · Tallinn, Estonia · <a href="mailto:andres.randmaa90@gmail.com">andres.randmaa90@gmail.com</a> · <a href="https://www.linkedin.com/in/andres-randmaa-b232aaa1">LinkedIn</a></p>
+    </footer>
+  </div>
+</body>
+</html>

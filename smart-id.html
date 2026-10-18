@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Smart-ID on Apple Watch · Andres Randmaa</title>
+  <meta name="description" content="How I proposed, designed and launched the Smart-ID Apple Watch app for confirming logins and signatures.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="site-name" href="index.html">Andres Randmaa</a>
+      <nav aria-label="Site">
+        <ul class="site-nav">
+          <li><a href="index.html">All case studies</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="intro intro-case">
+        <div class="intro-text">
+          <p class="eyebrow">Case study 02 · Smart-ID</p>
+          <h1>Logging in and signing from the wrist</h1>
+          <p class="lede">Smart-ID is how people in the Baltics and Belgium log in to banks and e-services and sign documents: they confirm a request and enter a PIN. I proposed doing that on an Apple Watch, persuaded the client it was worth building, designed it, and saw it launch in 2023.</p>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>My role</dt>
+            <dd>Analyst, UX consultant, apps and web portal designer, with Stagnation OÜ’s Smart-ID team. The full background is on <a href="smart-id-redesign.html">the research and design page</a>.</dd>
+          </div>
+          <div>
+            <dt>Who decides</dt>
+            <dd>SK ID Solutions’ service owners make the product decisions; I propose and design.</dd>
+          </div>
+          <div>
+            <dt>Scale</dt>
+            <dd>More than 3.8 million Smart-ID users. <span class="source">Source: <a href="https://www.smart-id.com">smart-id.com</a>, October 2026.</span></dd>
+          </div>
+        </dl>
+      </div>
+
+      <section aria-labelledby="problem">
+        <h2 id="problem"><span class="step">01</span>The problem</h2>
+        <div class="prose">
+          <p>Almost everything people do with Smart-ID is one short action: a service asks you to log in or sign, you check the request, you enter PIN1 or PIN2. That action needed a phone within reach every time.</p>
+          <p>I had worn an Apple Watch for years and could see the fit. The signal from users was informal but consistent: App Store reviews asking for a Watch app, and a few Smart-ID users I knew who wore one and wanted to log in without fetching their phone.</p>
+          <p>The objection was fair. Apple Watch owners are a small share of Smart-ID’s user base, so the idea sat unprioritised for about two years.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="scope">
+        <h2 id="scope"><span class="step">02</span>What I chose to build, and what I cut</h2>
+        <div class="prose">
+          <p>To get a decision I stopped arguing in the abstract and designed the whole flow, so that the scope and the cost were both visible. A Smart-ID app engineer then estimated the build, which came in well within the monthly development budget the client had already approved.</p>
+          <p>My case had three parts: users had been asking for this for years, the use case was a real one and not a novelty, and the cost was low. It also showed that Smart-ID keeps up with the devices its users own.</p>
+        </div>
+        <div class="split">
+          <div class="panel">
+            <h3>Built</h3>
+            <ul>
+              <li>Confirming a login or signing request for an account that is already active.</li>
+              <li>PIN entry on the watch.</li>
+              <li>Clear feedback when a transaction fails, sized for the watch.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Cut</h3>
+            <ul>
+              <li>Account registration. It needs identity documents and several steps, so it stays on the phone.</li>
+              <li>Every other feature of the phone app. A watch suits interactions that take seconds, and anything more would have slowed the one thing people came to do.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="design">
+        <h2 id="design"><span class="step">03</span>The design</h2>
+        <div class="prose">
+          <p>The user starts a login at an e-service by entering their national ID number. A push notification arrives on the iPhone and the Watch at the same time.</p>
+        </div>
+
+        <ol class="flow">
+          <li>
+            <strong>Notification</strong>
+            Tapping it opens the Smart-ID Watch app.
+          </li>
+          <li>
+            <strong>Check the request</strong>
+            Who is asking, what for, the verification code and the time left, then Confirm or Cancel.
+          </li>
+          <li>
+            <strong>Enter the PIN</strong>
+            PIN1 for a login, PIN2 for a signature, on a pad sized for the watch.
+          </li>
+          <li>
+            <strong>Done</strong>
+            A confirmation, then back to the app’s home screen.
+          </li>
+        </ol>
+
+        <figure class="map">
+          <a href="assets/smart-id/watch-journey-full.png">
+            <img src="assets/smart-id/watch-journey.png" width="3200" height="1707" alt="Flow diagram of the Smart-ID Apple Watch app. A notification opens the app; the user confirms the transaction, enters PIN1 or PIN2 and sees a completed screen. Branches show the expiry warning, expired transaction, wrong PIN, locked PIN, wrong verification code and cancel paths, all returning to the home screen.">
+          </a>
+          <figcaption>The whole Watch app as it shipped in 2023, with every branch. Top row: login with PIN1. Bottom row: confirming a transaction by choosing the matching code, then PIN2. <a href="assets/smart-id/watch-journey-full.png">Open at full size</a>.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <h3>One screen became two</h3>
+          <p>The phone app shows the transaction details and the PIN pad together. The watch has no room for both, so I split them. The split has a side benefit: the user reads who is asking, and confirms it, before a PIN pad appears.</p>
+
+          <h3>When something goes wrong</h3>
+          <p>A transaction has a time limit and several ways to fail, and each needed a state that fits a watch screen and says what to do next. A wrong PIN keeps the pad in place and shows the attempts left. A request about to expire shows a countdown alert; an expired request or a wrong verification code tells the user to start again at the service. If the request was already completed on the iPhone, the watch says so, so nobody enters a PIN for nothing.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="result">
+        <h2 id="result"><span class="step">04</span>The result</h2>
+        <div class="prose">
+          <p>The Watch app launched in 2023. By 2025, a five-figure number of Apple Watches had completed at least one Smart-ID transaction, and numerous users who had asked for a Watch app in their App Store reviews updated those reviews to higher ratings. <span class="source">Source: the client’s internal analytics and App Store Connect.</span></p>
+        </div>
+      </section>
+
+      <nav class="next" aria-label="More case studies">
+        <a href="smart-id-redesign.html"><span>Previous</span>Smart-ID research and design evolution</a>
+        <a class="next-forward" href="dagpay.html"><span>Next</span>Dagpay merchant onboarding and payment channels</a>
+      </nav>
+      <p class="next-home"><a href="index.html">Back to all case studies</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <p>Andres Randmaa · Tallinn, Estonia · <a href="mailto:andres.randmaa90@gmail.com">andres.randmaa90@gmail.com</a> · <a href="https://www.linkedin.com/in/andres-randmaa-b232aaa1">LinkedIn</a></p>
+    </footer>
+  </div>
+</body>
+</html>

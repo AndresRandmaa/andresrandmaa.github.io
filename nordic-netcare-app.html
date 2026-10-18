@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Nordic Netcare patient app · Andres Randmaa</title>
+  <meta name="description" content="How I rebuilt the Nordic Netcare patient app’s hard-coded screens as a grid-based component system developers could assemble dynamically.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="site-name" href="index.html">Andres Randmaa</a>
+      <nav aria-label="Site">
+        <ul class="site-nav">
+          <li><a href="index.html">All case studies</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="intro intro-case">
+        <div class="intro-text">
+          <p class="eyebrow">Case study 01 · Nordic Netcare</p>
+          <h1>From hard-coded screens to a patient app built from parts</h1>
+          <p class="lede">Nordic Netcare’s patient app had been designed screen by screen and built the same way. I broke the designs down into components on a shared grid and documented how each one behaves, so screens could be configured per insurance customer and assembled instead of built from scratch.</p>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>Problem</dt>
+            <dd>Hard-coded screens: every new component built from scratch, and the same app for every insurance customer.</dd>
+          </div>
+          <div>
+            <dt>Decision</dt>
+            <dd>Rebuild the designs as components on a grid with documented variants; cut a visual editor that would have cost more than it returned.</dd>
+          </div>
+          <div class="is-result">
+            <dt>Result</dt>
+            <dd>Each insurance customer can have its own components, content and order, managed from the practice management system. Better information hierarchy, and customer-specific changes ship faster without risking the rest of the app.</dd>
+          </div>
+        </dl>
+      </div>
+      <dl class="facts-meta">
+        <div>
+          <dt>My role</dt>
+          <dd>Hired as product manager, with a UX background; became the app’s product designer as well. 2024 to 2026.</dd>
+        </div>
+        <div>
+          <dt>Product</dt>
+          <dd>A progressive web app for physiotherapy patients referred by insurance companies: treatment plan, exercise videos and reading, consultations with a physiocoach, clinic referrals and reimbursements.</dd>
+        </div>
+      </dl>
+
+      <section aria-labelledby="problem">
+        <h2 id="problem"><span class="step">01</span>The problem</h2>
+        <div class="prose">
+          <p>The app’s structure was hard-coded. Every screen had been designed as a whole picture, and every new component had to be built from scratch, even when it was a small variation of something that already existed. Adding content or a feature meant new design and new code each time.</p>
+          <p>That also made the app the same for everyone. Nordic Netcare serves patients on behalf of several insurance companies, and there was no way to give one of them a different set of features or content without building it separately.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="system">
+        <h2 id="system"><span class="step">02</span>What I built</h2>
+        <div class="prose">
+          <p>I deconstructed the existing designs and rebuilt them on a grid. Each screen became a stack of parts: a header that adapts to the patient’s case, cards that link onward, sections with a title and an optional link, exercise plans, video tiles and reading lists. For each part I showed how it behaves in different situations: one line of text or two, with or without an image, a button or a link, one item or several.</p>
+          <p>The same files served as documentation for the developers, so they could build each component once and assemble screens from it. Because the app is a progressive web app that runs in any browser, the files also set out how the layout responds on tablets and desktops.</p>
+        </div>
+
+        <figure>
+          <img class="shot" src="assets/nnc-app/components-home.png" width="1359" height="1790" alt="The app’s home screen on the left, and beside it its parts drawn as grey low-fidelity components: header variants for one, two or three body regions, link cards, a weekly exercise plan with and without a note, video tile layouts, reading lists and the bottom navigation.">
+          <figcaption>The home screen broken down into components, with the variants each one needs.</figcaption>
+        </figure>
+
+        <figure>
+          <a href="assets/nnc-app/components-overview.png"><img class="shot" src="assets/nnc-app/components-overview.png" width="3200" height="1231" alt="Overview of the component work: mobile and tablet home screens broken into components, with layout examples showing how the same parts combine into different screens at both sizes."></a>
+          <figcaption>The full set: mobile and tablet, components and layout examples. <a href="assets/nnc-app/components-overview.png">Open at full size</a>.</figcaption>
+        </figure>
+
+        <div class="split">
+          <div class="panel">
+            <h3>Built</h3>
+            <ul>
+              <li>Components on a shared grid, each with its variants: one card or many, with or without images, sections with or without a link.</li>
+              <li>Per-customer configuration from the practice management system: which components are on, what content they show, and in what order.</li>
+              <li>Responsive rules for tablet and desktop.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Cut</h3>
+            <ul>
+              <li>A visual (WYSIWYG) editor for component details in the practice management system. It would have cost a lot to build for little return, and the goal was the opposite of free-form pages: a consistent structure whatever the content, whether a section holds one card or many.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="result">
+        <h2 id="result"><span class="step">03</span>The result</h2>
+        <div class="prose">
+          <p>The app became configurable. Each insurance customer can have its own layout: components switched on or off, and different content in them. That configuration, and the order of content on each screen, is managed from the practice management system instead of in code.</p>
+          <p>A side effect: the information hierarchy improved a lot. The old design leaned heavily on square block and card components for every kind of content. The new structure lets content be ordered by what matters to patients, or by what a particular customer wants to show.</p>
+        </div>
+
+        <figure class="phones phones-two">
+          <div>
+            <p class="label">Before</p>
+            <img src="assets/nnc-app/nnc-app-old.png" width="750" height="1624" alt="The old home screen: a large photo header reading Back, Lower back, then a grid of equal square tiles: PhysioCoach, Clinic, a cat exercise, all back exercises, what can I do myself, and tips and tricks, each a photo with a caption.">
+          </div>
+          <div>
+            <p class="label label-after">After</p>
+            <img src="assets/nnc-app/home-top.png" width="750" height="2126" alt="The new home screen: the insurer’s logo, a physiocoach card with Book consultation and Message, a clinic card with Submit Reimbursement, the week’s personalised exercise plan, and the start of recommended exercise videos.">
+          </div>
+          <figcaption>Before: every kind of content as an equal square tile. After: sections ordered by what the patient needs next. Demo data.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>It also made shipping different configurations faster. Before, even a small change for one customer needed considerable custom development, with the risk of breaking the general app for the others.</p>
+        </div>
+
+        <figure class="phones hero-phones">
+          <img src="assets/nnc-app/home-top.png" width="750" height="2126" alt="The app’s home screen for a back case: the insurer’s logo, a physiocoach card with Book consultation and Message, a clinic card with Submit Reimbursement, the week’s personalised exercise plan with completed exercises, and the start of recommended exercise videos.">
+          <img src="assets/nnc-app/physiocoach-top.png" width="750" height="2126" alt="The PhysioCoach screen: a photo of the patient’s physiocoach with buttons for Book consultation, Message and My Appointments, tiles for the personalised exercise plan and tips, recommended exercise videos and the start of the tips list.">
+          <img src="assets/nnc-app/exercise.png" width="750" height="2126" alt="An exercise screen: a video of the cat exercise, its title, a short description and step-by-step instructions, and a row of related exercise videos below.">
+          <figcaption>Home, PhysioCoach and an exercise, three screens assembled from the same components. Demo data.</figcaption>
+        </figure>
+      </section>
+
+      <nav class="next" aria-label="More case studies">
+        <a href="nordic-netcare.html"><span>Previous</span>Nordic Netcare’s AI invoice reader</a>
+        <a class="next-forward" href="nordic-netcare-scheduler.html"><span>Next</span>The scheduler redesign</a>
+      </nav>
+      <p class="next-home"><a href="index.html">Back to all case studies</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <p>Andres Randmaa · Tallinn, Estonia · <a href="mailto:andres.randmaa90@gmail.com">andres.randmaa90@gmail.com</a> · <a href="https://www.linkedin.com/in/andres-randmaa-b232aaa1">LinkedIn</a></p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Nordic Netcare scheduler · Andres Randmaa</title>
+  <meta name="description" content="How a request for a Calendly integration became a redesign of the scheduler Nordic Netcare already had: a week view, a legend for call types and states, a grouped day view and one-step booking, plus the booking flow patients see in the app.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="site-name" href="index.html">Andres Randmaa</a>
+      <nav aria-label="Site">
+        <ul class="site-nav">
+          <li><a href="index.html">All case studies</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="intro intro-case">
+        <div class="intro-text">
+          <p class="eyebrow">Case study 01 · Nordic Netcare</p>
+          <h1>Asked for Calendly, fixed the scheduler instead</h1>
+          <p class="lede">The co-CEO proposed replacing our confusing in-house scheduler with a Calendly integration. I looked for the actual problem first, and we redesigned the scheduler we already had.</p>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>Problem</dt>
+            <dd>Case workers found the in-house scheduler confusing, and the co-CEO proposed replacing it with Calendly.</dd>
+          </div>
+          <div>
+            <dt>Decision</dt>
+            <dd>Redesign the scheduler we had (week view, legend, one-step booking) instead of buying; the co-CEO and COO signed off.</dd>
+          </div>
+          <div class="is-result">
+            <dt>Result</dt>
+            <dd>The calendar became case workers’ main task list for the day, with no new subscription, as observed in day-to-day use.</dd>
+          </div>
+        </dl>
+      </div>
+      <dl class="facts-meta">
+        <div>
+          <dt>My role</dt>
+          <dd>Product manager and UX designer, hands-on. 2024 to 2026.</dd>
+        </div>
+        <div>
+          <dt>Product</dt>
+          <dd>The scheduler in the internal practice management system that case workers (physiocoaches among them) use, and the booking flow patients use in the app.</dd>
+        </div>
+        <div>
+          <dt>The flow</dt>
+          <dd>A case worker books calls with patients and plans the day from the calendar; patients book consultations from the same free times in the app.</dd>
+        </div>
+      </dl>
+
+      <section aria-labelledby="problem">
+        <h2 id="problem"><span class="step">01</span>The problem</h2>
+        <div class="prose">
+          <p>The practice management system had its own scheduler, and case workers, physiocoaches among them, found it confusing. It had a month view only, with each day’s appointments crammed into slots that could not expand. Colours marked appointment states and cancellations, but with no legend and no consistent meaning. The co-CEO proposed replacing it with a Calendly integration.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="scope">
+        <h2 id="scope"><span class="step">02</span>Why I did not buy</h2>
+        <div class="prose">
+          <p>Calendly would not have removed the work, only moved it. Our processes would have had to be mapped onto it, it would have needed integrating with the other scheduling features and with patients’ cases and records, and it would have added another subscription and another SLA.</p>
+          <p>So I looked for the actual problem. I watched and talked to case workers and used the scheduler myself. The pain points were design problems, not a missing product: people could not see their day, and could not tell a booked appointment from a cancelled one.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="design">
+        <h2 id="design"><span class="step">03</span>The design</h2>
+        <div class="prose">
+          <p>The practice management system is an internal tool, so the design work went into speed and clarity for case workers (fewer clicks, clearer controls), not visual polish.</p>
+          <p>I made quick mockups in Figma, borrowing patterns people already knew from Google Calendar, Apple Calendar and Calendly itself:</p>
+          <ul>
+            <li>A week view, alongside the month view, where appointments of 15 minutes to an hour have room.</li>
+            <li>Colours for call types and appointment states (booked, cancelled, expired), with a legend, so they read without being learned.</li>
+            <li>Free and busy time shown directly on the calendar.</li>
+          </ul>
+          <p>I showed the mockups to case workers for feedback before anything was built, and argued that most of the improvements were simple and cheap to make. The co-CEO and the COO reviewed the proposal and both signed off. We built it behind a feature flag, piloted it with a group of case workers and stakeholders, and then rolled it out to the whole team.</p>
+        </div>
+
+        <div class="prose">
+          <h3>The week view</h3>
+          <p>The calendar opens on the week. Each call sits at its time with room for the client’s name, the colour and icon say what kind of call it is, and free and busy time are blocks on the grid. A legend along the bottom explains the colours.</p>
+        </div>
+
+        <figure>
+          <img class="shot" src="assets/nnc/calendar-week.png" width="2196" height="1618" alt="The redesigned case worker calendar in week view. Hours run down the left; first calls and follow-up calls appear as green cards with icons for call type, a busy period in orange, free slots in blue, today’s column tinted, and a legend along the bottom.">
+          <figcaption>The redesigned week view, with demo data.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <h3>A day at a glance</h3>
+          <p>Opening a day used to show every event in one list, in no particular order: calls, video calls and free time mixed together, with three large “Add” buttons below. The redesigned day view groups events into reminders, appointments and recurring schedules, sorts them by time, and marks what matters for the next step: a first session, a cancelled or rescheduled call, a day marked as a holiday.</p>
+        </div>
+
+        <figure class="pair">
+          <div>
+            <p class="label">Before</p>
+            <img class="shot" src="assets/nnc/day-before.png" width="2464" height="1430" alt="The old day dialog for 13 June. Five rows in no time order: a video call at 13:00, calls at 09:30 and 11:00, and free time from 12:30 and from 09:30, each with a large black icon, followed by full-width buttons to add video calls and calls.">
+          </div>
+          <div>
+            <p class="label label-after">After</p>
+            <img class="shot" src="assets/nnc/day-after.png" width="1400" height="1526" alt="The redesigned Planned events dialog for Thursday 25 July. Under Appointments, four rows in time order, each with a coloured icon for call type, the time and the client name; one is marked FIRST, and one is a cancelled call with a rescheduled icon and the tooltip Rescheduled: Oct 12, 2024, 13:00 to 13:30. Under Schedules, a block labelled Busy · once and one labelled Free · weekly, Tuesdays. At the bottom, a Mark date as holiday checkbox.">
+          </div>
+          <figcaption>Before: events in no order, every type looking alike. After: grouped, in time order, with first sessions, cancellations and reschedules marked. Demo data.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <h3>Booking a call</h3>
+          <p>Booking used to take two dialogs. The first picked the client and case worker and showed a date. Saving opened a second one with three collapsible sections, “Quick selection”, “Assigned CW TimeSlots” and “Customize…”, and the free times were inside one of them. The redesigned dialog does it in one place: client, first session, case worker, date and duration, then the case worker’s free time slots as buttons. Changing the date or the case worker updates the slots, and a holiday says there are none.</p>
+        </div>
+
+        <figure class="pair">
+          <div>
+            <p class="label">Before</p>
+            <img class="shot" src="assets/nnc/book-before-1.png" width="1260" height="696" alt="Old first dialog, Schedule a video call: client, a first-session checkbox, case worker and a date, with Cancel and Save.">
+            <img class="shot" src="assets/nnc/book-before-2.png" width="671" height="824" alt="Old second dialog: three collapsible sections named Quick selection, Assigned CW TimeSlots and Customize, with a month calendar and a grid of times open in the middle one.">
+          </div>
+          <div>
+            <p class="label label-after">After</p>
+            <img class="shot" src="assets/nnc/book-after.png" width="1446" height="1526" alt="New single dialog, Schedule a video call: client, first session, case worker, a date with previous and next arrows, a duration of 15 minutes, and the case worker’s available time slots in 15-minute steps as a grid of buttons with 13:15 selected.">
+          </div>
+          <figcaption>Before: two dialogs, with the free times inside one of three collapsible sections. After: one dialog, with the case worker’s free times visible.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="patient">
+        <h2 id="patient"><span class="step">04</span>The patient side: booking a consultation</h2>
+        <div class="prose">
+          <p>The free times case workers manage in the scheduler are what patients book from in the <a href="nordic-netcare-app.html">patient app</a>. The practice management system had little need or drive for visual polish; the app, which patients use, is a different story, and its booking flow is built from the app’s components.</p>
+          <p>The patient makes one decision per step: voice or video, first call or follow-up, which physiocoach, then a free time from that person’s calendar. A confirmation sums up the date, time, call type and physiocoach before anything is booked.</p>
+        </div>
+
+        <figure class="phones">
+          <img src="assets/nnc-app/book-2-first-call.png" width="750" height="1624" alt="Book consultation: voice call selected, and a menu offering First call (30 minutes) or Follow-up.">
+          <img src="assets/nnc-app/book-3-coach.png" width="750" height="1624" alt="Book your consultation: a physiocoach menu listing five people, each with a tag for their profession: osteopath, physiotherapist or chiropractor.">
+          <img src="assets/nnc-app/book-4-time.png" width="750" height="1624" alt="Free times for Monday to Friday, one column per day, with 9:00 on Thursday selected and a Confirm time button.">
+          <img src="assets/nnc-app/book-5-confirm.png" width="750" height="1624" alt="Confirm appointment details dialog: Wednesday 7 September, 10:00 to 10:30, voice call, physiocoach named, and a Confirm and book button.">
+          <figcaption>Call type, physiocoach, time, confirmation. Demo data.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <h3>The cases around it</h3>
+          <p>After booking, the patient is told where to manage the appointment. If they try to book while one is already scheduled, the app says so and sends them to their appointments to change or cancel it, instead of letting a second booking through.</p>
+        </div>
+
+        <figure class="phones phones-two">
+          <img src="assets/nnc-app/book-6-booked.png" width="750" height="1624" alt="Appointment booked dialog with the booking summary and a Back to the app button.">
+          <img src="assets/nnc-app/book-7-already-booked.png" width="750" height="1624" alt="Message: you already have a scheduled consultation upcoming. To book a new one, go to My Appointments and cancel or edit the current appointment first. A My appointments button.">
+          <figcaption>Booked, and already booked.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="result">
+        <h2 id="result"><span class="step">05</span>The result</h2>
+        <div class="prose">
+          <p><strong>The calendar became the case workers’ main task list for the day.</strong> Before, most ran their day from the patient case view or a separate to-do list, because the calendar was too hard to read. Cancelled appointments became trackable, and booking mistakes such as scheduling the wrong client became less common. No new subscription was added.</p>
+        </div>
+      </section>
+
+      <nav class="next" aria-label="More case studies">
+        <a href="nordic-netcare-app.html"><span>Previous</span>The Nordic Netcare patient app</a>
+        <a class="next-forward" href="smart-id-redesign.html"><span>Next</span>Smart-ID research and design evolution</a>
+      </nav>
+      <p class="next-home"><a href="index.html">Back to all case studies</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <p>Andres Randmaa · Tallinn, Estonia · <a href="mailto:andres.randmaa90@gmail.com">andres.randmaa90@gmail.com</a> · <a href="https://www.linkedin.com/in/andres-randmaa-b232aaa1">LinkedIn</a></p>
+    </footer>
+  </div>
+</body>
+</html>

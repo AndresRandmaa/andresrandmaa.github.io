@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Smart-ID research and design evolution · Andres Randmaa</title>
+  <meta name="description" content="Usability research on Smart-ID and how the app’s registration, transaction and form design evolved.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="site-name" href="index.html">Andres Randmaa</a>
+      <nav aria-label="Site">
+        <ul class="site-nav">
+          <li><a href="index.html">All case studies</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="intro intro-case">
+        <div class="intro-text">
+          <p class="eyebrow">Case study 02 · Smart-ID</p>
+          <h1>Research and design evolution in the Smart-ID app</h1>
+          <p class="lede">Since 2017 I have run usability research on Smart-ID, and since 2020 I have led the design of its phone app and its web self-service and registration portals. This page covers both: what testing found and what it changed, and how the app’s design evolved, from the registration and transaction flows to its UI patterns.</p>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>Problem</dt>
+            <dd>Key flows had outgrown their original structure, and the app relied on long text to explain itself.</dd>
+          </div>
+          <div>
+            <dt>What I proposed</dt>
+            <dd>Restructure registration and transactions around what people choose and verify, and let visual patterns replace long explanations.</dd>
+          </div>
+          <div class="is-result">
+            <dt>Result</dt>
+            <dd>Fewer drop-offs and support requests in registration, from the client’s analytics.</dd>
+          </div>
+        </dl>
+      </div>
+      <dl class="facts-meta">
+        <div>
+          <dt>My role</dt>
+          <dd>Analyst, UX consultant, apps and web portal designer. I started in 2017 as analyst and project manager, took over usability research, and have led app design since 2020.</dd>
+        </div>
+        <div>
+          <dt>Scale</dt>
+          <dd>More than 3.8 million users in Estonia, Latvia and Lithuania, plus Belgium. <span class="source">Source: counters on <a href="https://www.smart-id.com">smart-id.com</a>, October 2026.</span></dd>
+        </div>
+      </dl>
+
+      <section aria-labelledby="research">
+        <h2 id="research"><span class="step">01</span>Research: testing, flow maps and findings</h2>
+        <div class="prose">
+          <p>Since 2017 I have organised and run more than ten rounds of usability testing on Smart-ID. The sessions were in person: participants used a demo app while I observed. Before launch I tested whether people of different ages and backgrounds could register an account using an ID-card, Mobile-ID or a bank link, and whether they understood a transaction: the details, the verification code and the PIN.</p>
+          <p>I wrote the test scenarios, and helped find UX researchers in the Baltics who ran the same scenarios there. I repeated the rounds when Smart-ID added biometric registration and registration with an existing Smart-ID account.</p>
+          <h3>Mapping the flows</h3>
+          <p>Alongside testing, mapping user journeys in the app and the registration portal was a recurring task in the early years: every screen of a flow on one canvas, with its branches and the conditions that lead to them. The maps helped the team understand the different registration flows, served for brainstorming and for briefing developers, and visualised experimental flows for upcoming features and for potential new clients.</p>
+        </div>
+
+        <figure class="map">
+          <a href="assets/smart-id/transaction-map-full.png">
+            <img src="assets/smart-id/transaction-map.png" width="3200" height="2560" alt="Journey map of a Smart-ID transaction in an early version of the phone app. A notification on the lock screen or as an alert opens the app. If the user has more than one Smart-ID device, a confirm-device screen comes first. If the e-service requests a code check, the user reviews the transaction details and picks the matching code; a wrong code cancels the transaction. Then the PIN screen, with a wrong-PIN state and a time-running-out warning, a loading screen, and either Login successful or Completed for signing. Side branches show help prompts for returning to the e-service on iOS and for push notifications that do not arrive on Android.">
+          </a>
+          <figcaption>A transaction in an early version of the phone app, with its different branches. <a href="assets/smart-id/transaction-map-full.png">Open at full size</a>.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <h3>Findings and what changed</h3>
+          <p>Across the rounds, the findings led to plainer wording with less technical jargon, reordered screens and added help screens, contrast and accessibility fixes after sessions with older participants, and bugs that development testing had missed.</p>
+          <p>One example: the rounds before biometric registration launched turned up the most to fix. Several participants struggled to photograph or scan their identity document. Sometimes the cause was an older phone with a poor camera. In other cases it was the instructions. The NFC scan needs the document’s chip against the phone’s reader, and the reader sits in a different place on different phones, so people had to try several positions before the scan connected. The on-screen text explained this at length; participants did not read it and looked for visual cues instead.</p>
+          <p>Among other changes, I proposed short animations showing what to do in place of the long explanations. Once they were added, I observed in the next round, with a new group of participants, that far more of them got through the photo and scan steps.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="evolution">
+        <h2 id="evolution"><span class="step">02</span>Design evolution: registration, transacting, UI patterns</h2>
+        <div class="prose">
+          <p>The app’s design changed over several years rather than in one redesign. Some changes grew out of research, support requests and analytics; others followed the product as it grew: new registration methods, transactions that carry more information, and an interface that had become text-heavy. The latest patterns were rolled out over the past year, building on earlier experiments.</p>
+          <h3 id="registration">Registration: choose by document, not by technology</h3>
+          <p>As registration methods were added, the method list was rearranged several times. Support requests and the client’s funnel analytics showed that people holding an ID-card still picked the less suitable route. The list put “ID-card” and “Biometric identification” side by side as equals, although biometric identification also works with an ID-card, and nothing on the screen said what each route required.</p>
+          <p>The service owners tested different copy for the methods, but none of it cleared the confusion. The list was organised by technology, while people think about the document in their hand. I proposed a hierarchy based on the document: country and document share the first screen, and the technology choice moves one level down, where each option says what it requires and the better one is marked as recommended.</p>
+        </div>
+
+        <figure class="screens">
+          <div class="screens-group">
+            <p class="label">Before</p>
+            <div class="screens-row">
+              <a class="zoom" href="assets/smart-id/reg-old-country.png"><img src="assets/smart-id/reg-old-country.png" width="750" height="1334" alt="Old screen titled Country of residence, with buttons for Estonia, Latvia, Lithuania and Other country."></a>
+              <a class="zoom" href="assets/smart-id/reg-old-method.png"><img src="assets/smart-id/reg-old-method.png" width="750" height="1334" alt="Old screen titled Choose authentication method, listing Biometric identification, Online bank or branch office, Mobile-ID, ID-card and Existing Smart-ID as five identical buttons."></a>
+            </div>
+          </div>
+          <div class="screens-group">
+            <p class="label label-after">After</p>
+            <div class="screens-row">
+              <a class="zoom" href="assets/smart-id/reg-new-method.png"><img src="assets/smart-id/reg-new-method.png" width="804" height="1748" alt="New screen titled Choose identification method. An issuing country selector sits above a list of methods, each with an icon: ID-card, Mobile-ID, Passport, Bank and Existing Smart-ID."></a>
+              <a class="zoom" href="assets/smart-id/reg-new-idcard.png"><img src="assets/smart-id/reg-new-idcard.png" width="804" height="1748" alt="New screen titled Choose how to identify, shown after choosing ID-card. Two options with descriptions: Contactless (NFC), marked Recommended, which requires the ID-card PIN codes, and Biometric identification, which requires an ID photo, an NFC scan and a selfie video."></a>
+            </div>
+          </div>
+          <figcaption>Before: country and method on separate screens, with five undifferentiated options. After: one screen organised by document, then a second that says what each route needs and recommends one. Select a screen to open it at full size.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>After release, the client’s funnel analytics showed fewer related support requests, fewer drop-offs in the affected flows, and higher completion for the registration methods involved. The service owner shared these results with me and the development team; the figures are the client’s and are not published here.</p>
+          <h3 id="transactions">Transactions: one place for everything to verify</h3>
+          <p>The service owner asked for transaction screens that carry more information than before. On the old screens, more lines would have buried the details further.</p>
+          <p>Approving a transaction means checking three things: which e-service is asking, what for, and whether the verification code matches the one the e-service shows. The old screens scattered them. The PIN screen had the e-service name at the top, the code in the largest type, and the details in small print below it, cut to two lines behind “See more”. A separate review step existed, but it was not always shown.</p>
+          <p>The review step is now always shown. I proposed a new information hierarchy for it: everything the user should verify sits together in one compact section, the e-service name with the full transaction text directly beneath it. The verification code keeps its large type, because making sure it matches is still the most important check. The PIN screen repeats the same section as a summary and says what the PIN will do: “Enter PIN2 to confirm”.</p>
+        </div>
+
+        <figure class="screens">
+          <div class="screens-group">
+            <p class="label">Before</p>
+            <div class="screens-row">
+              <a class="zoom" href="assets/smart-id/tx-old-review.png"><img src="assets/smart-id/tx-old-review.png" width="750" height="1334" alt="Old review step, a modal titled Confirm transaction details. A recipient name, an amount and a description are centred on three separate lines, followed by three stacked verification code buttons and Cancel."></a>
+              <a class="zoom" href="assets/smart-id/tx-old-pin.png"><img src="assets/smart-id/tx-old-pin.png" width="750" height="1334" alt="Old PIN screen. Swedbank and the verification code 1234 in large type, a transaction details box truncated after two lines with a See more link, and the PIN2 keypad."></a>
+            </div>
+          </div>
+          <div class="screens-group">
+            <p class="label label-after">After</p>
+            <div class="screens-row">
+              <a class="zoom" href="assets/smart-id/tx-new-review.png"><img src="assets/smart-id/tx-new-review.png" width="804" height="1748" alt="New Review details sheet. One card holds Swedbank and the full text of a 1000 euro transfer to Jane Doe with reference number and description. Below it, three verification codes to choose from in a single row, and Cancel."></a>
+              <a class="zoom" href="assets/smart-id/tx-new-pin.png"><img src="assets/smart-id/tx-new-pin.png" width="804" height="1748" alt="New Confirm action screen. The same card as a summary, the prompt Enter PIN2 to confirm, and the keypad."></a>
+            </div>
+          </div>
+          <figcaption>A bank transfer where the user picks the matching code. Before: the details are loose lines in the review step and small print on the PIN screen. After: one card carries the service and the full request through both steps. Select a screen to open it at full size.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <h3 id="patterns">UI patterns: show more, explain less</h3>
+          <p>The app had become text-heavy, often explaining in a paragraph what a better pattern could show. Detailed accessibility reports and an ageing interface pointed the same way.</p>
+          <p>The newer patterns lean on visual cues instead of text: icons next to options, cards that say what each choice requires and which one is recommended, bottom sheets instead of dropdowns, and labels and errors that live in the field they belong to.</p>
+        </div>
+
+        <figure class="screens screens-stacked">
+          <div class="screens-group">
+            <p class="label">Before</p>
+            <div class="screens-row">
+              <a class="zoom" href="assets/smart-id/reg-old-method.png"><img src="assets/smart-id/reg-old-method.png" width="750" height="1334" alt="Old screen titled Choose authentication method, listing Biometric identification, Online bank or branch office, Mobile-ID, ID-card and Existing Smart-ID as five identical buttons."></a>
+              <a class="zoom" href="assets/smart-id/contact-old.png"><img src="assets/smart-id/contact-old.png" width="750" height="1334" alt="Old How can we reach you? screen. Centred labels Phone: and E-mail: above two pale rounded fields, the phone field with an Estonian flag dropdown, low on the screen below a large gap. Continue, a Back link and four step dots at the bottom."></a>
+              <a class="zoom" href="assets/smart-id/contact-old-phone.png"><img src="assets/smart-id/contact-old-phone.png" width="750" height="1334" alt="The same old screen with the country dropdown open: an inline list of Eesti +372, Latvija +371 and Lietuva +370, with flags, covering the Continue button."></a>
+              <a class="zoom" href="assets/smart-id/contact-old-email-invalid.png"><img src="assets/smart-id/contact-old-email-invalid.png" width="750" height="1334" alt="The same old screen with an invalid email, mail.com. The label above the field is replaced by red bold text, E-mail format is invalid, and the field turns pink with a red outline."></a>
+            </div>
+          </div>
+          <div class="screens-group">
+            <p class="label label-after">After</p>
+            <div class="screens-row">
+              <a class="zoom" href="assets/smart-id/reg-new-method.png"><img src="assets/smart-id/reg-new-method.png" width="804" height="1748" alt="New screen titled Choose identification method. An issuing country selector sits above a list of methods, each with an icon: ID-card, Mobile-ID, Passport, Bank and Existing Smart-ID."></a>
+              <a class="zoom" href="assets/smart-id/reg-new-idcard.png"><img src="assets/smart-id/reg-new-idcard.png" width="804" height="1748" alt="New screen titled Choose how to identify, shown after choosing ID-card. Two options with descriptions: Contactless (NFC), marked Recommended, which requires the ID-card PIN codes, and Biometric identification, which requires an ID photo, an NFC scan and a selfie video."></a>
+              <a class="zoom" href="assets/smart-id/contact-new-country.png"><img src="assets/smart-id/contact-new-country.png" width="804" height="1748" alt="New Select country code bottom sheet with a close button: Estonia +372, Latvia +371, Lithuania +370, Belgium +32, Denmark +45, Finland +358, Norway +47, Poland +48, Sweden +46, Iceland +354, and Other country."></a>
+              <a class="zoom" href="assets/smart-id/contact-new-error.png"><img src="assets/smart-id/contact-new-error.png" width="804" height="1748" alt="The new screen with an invalid email, mail.com. The label in the outline is replaced by red text, E-mail format is invalid, the outline turns red, and Continue is disabled."></a>
+            </div>
+          </div>
+          <figcaption>Before: identical text buttons, an inline dropdown, and errors set above the field. After: icons, cards that state what each route needs, a bottom sheet for country codes, and errors in the field outline. Select a screen to open it at full size.</figcaption>
+        </figure>
+      </section>
+
+      <nav class="next" aria-label="More case studies">
+        <a href="nordic-netcare-scheduler.html"><span>Previous</span>The Nordic Netcare scheduler</a>
+        <a class="next-forward" href="smart-id.html"><span>Next</span>The Smart-ID Apple Watch app</a>
+      </nav>
+      <p class="next-home"><a href="index.html">Back to all case studies</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <p>Andres Randmaa · Tallinn, Estonia · <a href="mailto:andres.randmaa90@gmail.com">andres.randmaa90@gmail.com</a> · <a href="https://www.linkedin.com/in/andres-randmaa-b232aaa1">LinkedIn</a></p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Dagpay · Andres Randmaa</title>
+  <meta name="description" content="How I replaced strict KYC with tiered onboarding at Dagpay, a crypto payment gateway for merchants, and ordered its three invoicing channels using usage data.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="site-name" href="index.html">Andres Randmaa</a>
+      <nav aria-label="Site">
+        <ul class="site-nav">
+          <li><a href="index.html">All case studies</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="intro intro-case">
+        <div class="intro-text">
+          <p class="eyebrow">Case study 03 · Dagpay</p>
+          <h1>Getting merchants onboarded, then deciding how they get paid</h1>
+          <p class="lede">Dagpay is a payment gateway that lets merchants accept Dagcoin, a cryptocurrency. I joined as product manager while it was still being conceived and shaped the platform around a barebones API. Two decisions stand out: replacing strict KYC with tiered onboarding, which let most merchants through, and the order of the three invoicing channels, where usage data let me stop investing in the one that was barely used.</p>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>Problem</dt>
+            <dd>Strict KYC kept merchants, small businesses above all, from getting through onboarding on a platform meant to work globally.</dd>
+          </div>
+          <div>
+            <dt>Decision</dt>
+            <dd>Replace it with three tiers: start accepting payments under a monthly volume cap, provide more documents to raise it.</dd>
+          </div>
+          <div class="is-result">
+            <dt>Result</dt>
+            <dd>More merchants completed onboarding and got to a first payment faster. More than 5,000 merchants onboarded over time.</dd>
+          </div>
+        </dl>
+      </div>
+      <dl class="facts-meta">
+        <div>
+          <dt>My role</dt>
+          <dd>Product owner and product manager for the whole lifecycle, from conception through launch to maintenance. End of 2018 to summer 2023.</dd>
+        </div>
+        <div>
+          <dt>Product</dt>
+          <dd>A merchant web app, an API with plugins for online shops, and a point-of-sale app for Android and iOS.</dd>
+        </div>
+        <div>
+          <dt>Today</dt>
+          <dd>Largely wound down.</dd>
+        </div>
+      </dl>
+
+      <section aria-labelledby="problem">
+        <h2 id="problem"><span class="step">01</span>Where it started</h2>
+        <div class="prose">
+          <p>When I joined at the end of 2018, Dagpay did not exist yet as a product. A first, barebones version of the API payment flow had been started, with no platform around it. My job was to imagine the rest:</p>
+          <ul>
+            <li>The invoice payment flow itself: the customer pays from their crypto wallet by scanning a QR code.</li>
+            <li>Merchant account creation, onboarding and KYC.</li>
+            <li>Transaction details, and an overview of all of a merchant’s transactions.</li>
+            <li>Draft FAQ material to support onboarding.</li>
+          </ul>
+          <p>Two parts of that turned into the decisions below: how much a merchant had to prove before accepting payments, and which ways of invoicing to build, in what order.</p>
+        </div>
+
+        <figure>
+          <img class="shot" src="assets/dagpay/site-transactions.png" width="1496" height="355" alt="The Dagpay merchant web app as shown on the public site. A sidebar with Dashboard, Email Invoice, POS Checkout, Transactions (selected) and Merchant Tools. The Transaction history page has a date range from 1 Jan 2018 to 13 Sep 2018, filters for type, status and users, Apply and Export, and a first row: 1 September 14:59, invoice 19111100004, type POS, status Paid, 714.123456 DAG, 20.4 EUR.">
+          <figcaption>The merchant web app’s transaction history, where payments from every channel end up in one list, filterable by type.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="onboarding">
+        <h2 id="onboarding"><span class="step">02</span>Onboarding: from strict KYC to tiers</h2>
+        <div class="prose">
+          <p>To set the KYC requirements, I researched how competing platforms such as BitPay and Crypto.com handled them, and worked out with the company’s legal team what merchants had to provide before they could accept payments.</p>
+          <p>The first requirements were very strict. Before accepting a single payment, a merchant had to provide company registration documents, proof of address, ID for directors and beneficial owners, and a description of the business. For a small business that was a heavy burden, and in some countries merchants did not have all of these documents at all. That was a real problem for a platform meant to work globally from the start, since cross-border payments are one of the main reasons to use a cryptocurrency. It was clear early on that merchants struggled to get through.</p>
+          <p>It was also more than the service called for. Unlike many crypto payment gateways, Dagpay never held or moved the funds: it tracked payments between crypto wallets on the public blockchain, monitored their status and gave the merchant an overview.</p>
+        </div>
+
+        <figure>
+          <img class="shot" src="assets/dagpay/site-how-it-works.png" width="1200" height="571" alt="Three line illustrations from the Dagpay website. Customer: chooses to pay in dagcoins, a finger tapping a green Pay button on a phone. Dagpay: creates an invoice with a unique code for the customer and provides payment information to the merchant, a point-of-sale keypad showing 17.00D next to a QR code. Merchant: customer pays directly to your Dagcoin wallet, a hand dropping a coin into a wallet.">
+          <figcaption>The customer pays from their own wallet straight into the merchant’s; Dagpay creates the invoice and tracks the payment, but never holds the money.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>After the initial launch I pushed back to relax the requirements and proposed tiered onboarding instead. Each tier capped monthly payment volume, with limits agreed with the legal team to comply with the regulations of the time:</p>
+        </div>
+        <ol class="flow">
+          <li>
+            <strong>Tier 1: a low monthly cap</strong>
+            Where every merchant started, with the least documentation.
+          </li>
+          <li>
+            <strong>Tier 2: a higher cap</strong>
+            Unlocked by providing more company documentation and proof.
+          </li>
+          <li>
+            <strong>Tier 3: no cap</strong>
+            Unlocked by providing the most documentation and proof.
+          </li>
+        </ol>
+        <div class="prose">
+          <p>Merchants moved up from inside the Dagpay web app: they uploaded documents there, and could see their limit and how much of it they had used. When they neared their cap, they were told by email in advance. The support team reviewed the documents by hand against internal compliance rules, within 48 hours.</p>
+          <p>Tiered onboarding shipped. It let most merchants get through onboarding, and they got to their first payment faster.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="order">
+        <h2 id="order"><span class="step">03</span>Three channels, and the order I chose</h2>
+        <div class="prose">
+          <p>Merchants sold in different ways: through platforms and online shops, at a counter, or, mostly freelancers, one client at a time. Each needed its own way to invoice, and we could not build all three at once.</p>
+        </div>
+        <ol class="flow">
+          <li>
+            <strong>API and shop plugins</strong>
+            A first version existed when I joined. Custom integrations for the products in the Dagcoin ecosystem that already accepted it, and plugins for WooCommerce and Magento. This channel carried most of the payment volume.
+          </li>
+          <li>
+            <strong>Point-of-sale app</strong>
+            An Android and iOS app for brick-and-mortar shops, in line with the strategy of making payments as easy as possible to accept in person.
+          </li>
+          <li>
+            <strong>Invoice links by email</strong>
+            For freelancers and one-off invoices. A niche next to the other two, built last, at the request of stakeholders and management.
+          </li>
+        </ol>
+
+        <figure class="pair">
+          <div>
+            <h3>In person</h3>
+            <img class="shot" src="assets/dagpay/site-pos.png" width="1280" height="1080" alt="Point-of-sale checkout as shown on the Dagpay website. Behind, the merchant’s keypad for entering the amount to pay. In front, the screen the customer sees: Payment expires in 09:58, awaiting payment, payment to Alfacom Ltd, 456.123456 DAG, 27.5 USD, and a QR code to scan with the DagWallet app.">
+          </div>
+          <div>
+            <h3>By email</h3>
+            <img class="shot" src="assets/dagpay/site-email.png" width="1290" height="1160" alt="Email invoicing as shown on the Dagpay website. A mail client with a payment receipt from Alfacom Ltd open: your payment of 550 DAG has been received, with sender details, payment date, invoice number, invoice ID, receiver and buyer wallets, and the description Weekly magazine subscription.">
+          </div>
+          <figcaption>Two of the channels as the public site shows them today. In person: the merchant enters the amount, the customer scans a QR code before a countdown runs out. By email: the receipt a customer gets after paying an emailed invoice. Flows I designed, shown as marketing illustrations with demo data on <a href="https://www.dagpay.io">dagpay.io</a>.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>I expected email invoicing to see little use. When we added analytics to it, the data confirmed that: usage was low. That gave me grounds to push back on developing it further and to put the time into use cases that were worth more.</p>
+        </div>
+        <div class="split">
+          <div class="panel">
+            <h3>Built</h3>
+            <ul>
+              <li>The API, with custom integrations for ecosystem platforms and plugins for WooCommerce and Magento.</li>
+              <li>The point-of-sale app for Android and iOS.</li>
+              <li>Invoice links by email, with usage analytics.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Cut</h3>
+            <ul>
+              <li>Further work on email invoicing, once the analytics showed low usage.</li>
+              <li>Plugins for OpenCart, PrestaShop and Easy Digital Downloads, retired soon after launch because there was little or no interest.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="work">
+        <h2 id="work"><span class="step">04</span>How I worked</h2>
+        <div class="prose">
+          <p>I wrote the PRDs, planned the releases, ran the agile ceremonies and saw features through to shipping. Nearly the whole platform started as my wireframes, user journeys and mockups. I evaluated them with stakeholders and test users, then handed them to the design team for branding and polish. A strong in-house technical team built it.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="result">
+        <h2 id="result"><span class="step">05</span>The result</h2>
+        <div class="prose">
+          <p><strong>More than 5,000 merchants onboarded</strong> over time, and <strong>thousands of transactions a day</strong> at the peak. Each decision above had its own outcome:</p>
+        </div>
+        <ol class="flow">
+          <li>
+            <strong>Tiered onboarding</strong>
+            Let most merchants get through onboarding, and they got to their first payment faster.
+          </li>
+          <li>
+            <strong>The API first</strong>
+            Carried most of the transactions, from ecosystem platforms such as a crypto exchange. The WooCommerce and Magento plugins were used by a few merchants.
+          </li>
+          <li>
+            <strong>Measuring email invoicing</strong>
+            Usage data confirmed the channel was barely used, which gave me grounds to push back on further development and put the time into more valuable use cases.
+          </li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="learned">
+        <h2 id="learned"><span class="step">06</span>What I took from it</h2>
+        <div class="prose">
+          <p>Taking Dagpay from a barebones API to a platform with more than 5,000 merchants taught me a lot about building a product end to end. Looking back, we added features when we should have tested demand first and changed course sooner. Email invoicing is the pattern I would repeat: measure early, and let the numbers decide what gets built next.</p>
+        </div>
+      </section>
+
+      <nav class="next" aria-label="More case studies">
+        <a href="smart-id.html"><span>Previous</span>The Smart-ID Apple Watch app</a>
+      </nav>
+      <p class="next-home"><a href="index.html">Back to all case studies</a></p>
+    </main>
+
+    <footer class="site-footer">
+      <p>Andres Randmaa · Tallinn, Estonia · <a href="mailto:andres.randmaa90@gmail.com">andres.randmaa90@gmail.com</a> · <a href="https://www.linkedin.com/in/andres-randmaa-b232aaa1">LinkedIn</a></p>
+    </footer>
+  </div>
+</body>
+</html>
