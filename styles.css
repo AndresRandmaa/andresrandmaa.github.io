@@ -1497,15 +1497,28 @@ html:has(.lightbox[open]) {
   overflow: hidden;
 }
 
-/* Case page content fades up as it scrolls into view (site.js adds .reveal
-   only to content below the first screen, and never under reduced motion). */
+/* Case page sections fade up as a block as they scroll into view (site.js adds .reveal
+   to sections below the first screen, and never under reduced motion). */
 .reveal {
   opacity: 0;
   transform: translateY(1rem);
-  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* The transition sits on the revealed state only, so hiding is instant. The
+   number, node and title come first; the content follows a beat later.
+   Blocks more than a screen below get .is-shown: visible, no animation. */
 .reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.15s, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.15s;
+}
+
+main > section > h2.reveal.is-revealed {
+  transition-duration: 0.9s;
+  transition-delay: 0s;
+}
+
+.reveal.is-shown {
   opacity: 1;
   transform: none;
 }

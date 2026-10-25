@@ -91,35 +91,43 @@ const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 })();
 
-// Case pages: content below the first screen fades up as it scrolls into view.
+// Case pages: each numbered section (number, node, title and content) fades up
+// as one block when it scrolls into view. Sections already on the first screen
+// stay as they are.
 (() => {
   if (reducedMotion || !document.querySelector(".intro-case") || !("IntersectionObserver" in window)) return;
 
-  const items = [];
-  for (const section of document.querySelectorAll("main > section")) {
-    for (const child of section.children) {
-      if (child.tagName === "H2") continue;
-      if (child.classList.contains("prose")) items.push(...child.children);
-      else items.push(child);
-    }
-  }
-
   const fold = innerHeight;
-  const hidden = items.filter((el) => el.getBoundingClientRect().top > fold);
+  if (!fold) return;
+  const parts = (section) => [...section.children];
 
-  const observer = new IntersectionObserver((entries) => {
-    let delay = 0;
+  // Start loading a section's images a screen before it arrives, so they are
+  // ready when it fades in instead of popping in one by one.
+  const preload = new IntersectionObserver((entries) => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
-      entry.target.style.transitionDelay = `${delay}ms`;
-      entry.target.classList.add("is-revealed");
-      observer.unobserve(entry.target);
-      delay = Math.min(delay + 80, 240);
+      for (const img of entry.target.querySelectorAll('img[loading="lazy"]')) img.loading = "eager";
+      preload.unobserve(entry.target);
     }
-  }, { rootMargin: "0px 0px -8% 0px" });
+  }, { rootMargin: "100% 0px" });
 
-  for (const el of hidden) {
-    el.classList.add("reveal");
-    observer.observe(el);
+  // Fade in everything within the next screen, which is all a reader can reach
+  // while the fade runs; anything further down is shown without animation, so
+  // nothing large animates off screen.
+  const reveal = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      for (const el of parts(entry.target)) {
+        el.classList.add(el.getBoundingClientRect().top < innerHeight * 2 ? "is-revealed" : "is-shown");
+      }
+      reveal.unobserve(entry.target);
+    }
+  }, { rootMargin: "0px 0px -15% 0px" });
+
+  for (const section of document.querySelectorAll("main > section")) {
+    preload.observe(section);
+    if (section.getBoundingClientRect().top <= fold) continue;
+    for (const el of parts(section)) el.classList.add("reveal");
+    reveal.observe(section);
   }
 })();
