@@ -2,6 +2,19 @@
 
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// In-page links (the home page contents) glide to their section. Done here
+// rather than with CSS scroll-behavior on the whole page, which made Safari's
+// trackpad scrolling jumpy. The skip link keeps its plain jump.
+document.addEventListener("click", (e) => {
+  const link = e.target.closest('a[href^="#"]:not(.skip)');
+  if (!link || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+  history.pushState(null, "", link.hash);
+});
+
 // Forward and back cursor on links between case studies (mouse only).
 // Replaces the static SVG cursors in styles.css with one that grows in.
 (() => {
