@@ -48,6 +48,30 @@ document.addEventListener("click", (e) => {
   });
 })();
 
+// Numbered markers on a screenshot and the numbered list that explains them:
+// hovering either highlights both, and the marker shows the item's heading.
+(() => {
+  for (const figure of document.querySelectorAll(".annotated")) {
+    const section = figure.closest("section");
+    const list = section && section.querySelector("ol.details");
+    if (!list) continue;
+    const markers = [...figure.querySelectorAll(".marker")];
+    const items = [...list.children];
+    markers.forEach((marker, i) => {
+      const item = items[i];
+      if (!item) return;
+      const heading = item.querySelector("strong");
+      if (heading) marker.dataset.label = heading.textContent.trim().replace(/[.:]$/, "");
+      const on = () => { marker.classList.add("is-active"); item.classList.add("is-active"); };
+      const off = () => { marker.classList.remove("is-active"); item.classList.remove("is-active"); };
+      for (const el of [marker, item]) {
+        el.addEventListener("pointerenter", on);
+        el.addEventListener("pointerleave", off);
+      }
+    });
+  }
+})();
+
 // Screens linked with a.zoom open enlarged on the page instead of as a bare
 // file. Modified clicks (new tab, download) keep the plain link.
 (() => {
